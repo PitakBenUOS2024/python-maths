@@ -5,15 +5,16 @@ import pytest
 from pythonmaths import arithmetic
 
 
-@pytest.mark.parametrize(  # type: ignore[misc]
-    ("x", "y", "expected"),
-    [
-        pytest.param(1, 3, 4, id="Add two positive integers"),
-        pytest.param(1, -3, -2, id="Add a positive and negative integer"),
-        pytest.param(-1, -3, -4, id="Add two negative integers"),
-        pytest.param(10, 0, 10, id="Add zero to integer"),
-        pytest.param(0, 10, 10, id="Add integer to zero"),
-        pytest.param(0.1, 10.34, 10.44, id="Add two positive floats"),
+
+@pytest.mark.parametrize( # type: ignore[misc] 
+	("x", "y", "expected"), 
+	[ 
+		pytest.param(1, 3, 4, id="Add two positive integers"), 
+		pytest.param(1, -3, -2, id="Add a positive and negative integer"), 
+		pytest.param(-1, -3, -4, id="Add two negative integers"), 
+		pytest.param(10, 0, 10, id="Add zero to integer"), 
+		pytest.param(0, 10, 10, id="Add integer to zero"), 
+                pytest.param(0.1, 10.34, 10.44, id="Add two positive floats"),
     ],
 )
 def test_add(x: int | float, y: int | float, expected: int | float) -> None:
@@ -64,3 +65,15 @@ def test_multiply(x: int | float, y: int | float, expected: int | float) -> None
 def test_divide(x: int | float, y: int | float, expected: int | float) -> None:
     """Test the divide function."""
     assert arithmetic.divide(x, y) == pytest.approx(expected)
+@pytest.mark.parametrize(
+    ("x", "target"),
+    [
+        pytest.mark(4, 2, id="square root of 4"),
+        pytest.mark(9, 3.0, id="square root of 9"),
+        pytest.mark(25, 5.0, id="square root of 25"),
+        pytest.mark(2, 1.4142135623730951, id="square root of 2"),
+    ],
+)
+def test_square_root(x: int | float, target: int | float) -> None:
+    """Test the square_root() function."""
+    assert pytest.approx(arithmetic.square_root(x), target)
